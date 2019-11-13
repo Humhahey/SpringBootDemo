@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.humhahey.mapper.ProductMapper">
+    <select id="getProduct" parameterType="int" resultType="product">
+        select id,name,stock,version,price,note from product where id=#{id};
+    </select>
+
+    <update id="decreaseProduct">
+        update product set stock=stock-#{quantity}
+        where id=#{id};
+    </update>
+
+    <insert id="insertProduct" parameterType="product" keyProperty="id" useGeneratedKeys="true">
+        insert into product(name, stock, version, price, note) VALUES (#{name},#{stock},#{version},#{price},#{note})
+    </insert>
+
+</mapper>
